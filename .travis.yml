@@ -1,12 +1,24 @@
 language: php
-
 php:
-  - 7.2
-  - 7.3
-
+- 7.2
+- 7.3
 before_script:
-  - travis_retry composer self-update
-  - travis_retry composer install --no-interaction --dev
-
+- travis_retry composer self-update
+- travis_retry composer install --no-interaction --dev
 script:
-  - vendor/bin/phpunit
+- vendor/bin/phpunit
+deploy:
+  provider: releases
+  api_key:
+    secure: T3h7WoE2JNuL3xB3L/qMbGnH8mVs0w7zNbvhx5i0MgKrTkaJ0NCpwxKF5scsVnGq8GDUzGyhMY5v0278x80KN53YGIZXJpK8OtImODucr8tOH2Z7ZLVf78MrglWwZeXThS2ENhVAm0GjHoZbvbfTB5uYXR2ZGodaT3a1fdMY97+0phf/gBjrX+W93SHP0o0FKrIaLFXL0rPsRTiFnk1kaZaEDUFMaAOp0MgizQeVJs6NkrGZ7VlNPWYOkIGKer90ekE1lmqSHtMo8HeXo6R2JPecq5JSRJe7iHxgv7cgcrgSyRwXfv2zu+z8XPnsDEaNJY/617t76bJmYT8ZbHuy7V/8xcgeH9JgxBPxvWEf5GYws9hS4ueYeQ2NEtGekflxnFzk/z/N8WwgAmwvyjRujM2iIG8w+U0+gmVcxBbwq3e6LBfqzKjriA60e9b0m6OU8T2rIlKiR5E6YSLwgu7mLZoAdFBIMuk0ArMOTTwWWFB1TUmW7njz5SafVathbpKmeDzUjXcvAnDnSJ9I8ugNOAcHInnxJuGazC8iPeUitDtbDeECAo+GBaGZhCNYZyL2/fiZzEl5yBMkMM1A6fghHBk80upwbhm8eKeDVTqxLPEXlmekqm51k6hCcUQkCjSJlAzRNwwsFgkiakE2Na65VRUllJ3aJLuslzbdjdwzz74=
+  file_glob: true
+  file:
+    - src/**/*
+    - support/**/*
+    - tests/**/*
+    - composer.json
+    - LICENSE.md
+    - README.md
+    - phpunit.xml
+  on:
+    tags: true
